@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dawit Yirdaw Mesfin — IT Support & Web Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F6FC;--panel:#FFFFFF;--text:#0E1536;--muted:#4A547A;--line:#D3D9EE;--accent:#B35A00;--accent-bg:#FFE9CC;
+  --screen:#0A1030;--led:#FFB020;--led-dim:#26307A;
+  --display:"Bricolage Grotesque","Trebuchet MS",Arial,sans-serif;--body:"DM Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0C1330;--panel:#121B42;--text:#EAF0FF;--muted:#A9B4DC;--line:#27326B;--accent:#FFB020;--accent-bg:#2A2410}}
+:root[data-theme="dark"]{--bg:#0C1330;--panel:#121B42;--text:#EAF0FF;--muted:#A9B4DC;--line:#27326B;--accent:#FFB020;--accent-bg:#2A2410}
+html{scroll-behavior:smooth;scroll-padding-top:calc(64px + env(safe-area-inset-top,0px));height:100%}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:400 1.0625rem/1.6 var(--body)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--led);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:20;padding-top:env(safe-area-inset-top,0px);background:rgba(10,16,48,.72);backdrop-filter:blur(10px);color:#EAF0FF}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+nav b{font:800 1.1rem var(--display);letter-spacing:.01em}
+nav ul{display:flex;gap:clamp(12px,3vw,28px);list-style:none;margin:0;padding:0;overflow-x:auto}
+nav a{text-decoration:none;font-size:.95rem;font-weight:500;padding:6px 2px;border-bottom:2px solid transparent;white-space:nowrap}
+nav a:hover{border-color:var(--led)}
+
+/* hero: an LED wall that switches on */
+.hero{position:relative;min-height:100svh;min-height:100vh;background:var(--screen);color:#EAF0FF;overflow:hidden;display:flex;align-items:flex-end}
+#wall{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y}
+.hero .wrap{position:relative;z-index:2;width:100%;padding-bottom:clamp(36px,8vh,80px);pointer-events:none}
+.hero h1{margin:0;font:800 clamp(1.7rem,4.4vw,3rem)/1.1 var(--display)}
+.hero p{max-width:34em;margin:14px 0 24px;color:#C4CDF0;font-size:1.1rem}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px;pointer-events:auto}
+.in{opacity:0;transform:translateY(18px)}
+.on .in{animation:rise .8s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--d,0)*1s + 1.9s)}
+@keyframes rise{to{opacity:1;transform:none}}
+.btn{display:inline-block;text-decoration:none;font-weight:700;padding:13px 22px;border-radius:999px;border:2px solid var(--led);transition:transform .2s,background .2s,color .2s}
+.btn.solid{background:var(--led);color:#1A1200}
+.btn.ghost{color:#EAF0FF}
+.btn:hover{transform:translateY(-3px) scale(1.03)}
+.btn.ghost:hover{background:var(--led);color:#1A1200}
+.hint{position:absolute;right:clamp(20px,5vw,40px);bottom:24px;z-index:2;font-size:.85rem;color:#8F9BD0;opacity:0;animation:rise .8s 2.6s forwards}
+
+/* sections */
+section.s{padding:clamp(64px,10vw,110px) 0;border-top:1px solid var(--line)}
+section.s:first-of-type{border-top:0}
+h2{font:800 clamp(1.8rem,4vw,2.6rem)/1.15 var(--display);margin:0 0 28px;max-width:16em}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,56px)}
+.lead{font-size:1.25rem;line-height:1.55;margin:0}
+.facts{display:grid;gap:14px;margin:0;padding:0;list-style:none}
+.facts li{padding:14px 16px;border-left:4px solid var(--led);background:var(--panel)}
+.facts strong{display:block;font:800 1.5rem var(--display)}
+.facts span{color:var(--muted);font-size:.95rem}
+
+.role{position:relative;padding:0 0 0 28px;border-left:3px solid var(--line)}
+.role::before{content:"";position:absolute;left:-9px;top:6px;width:15px;height:15px;border-radius:50%;background:var(--led);box-shadow:0 0 0 6px var(--accent-bg)}
+.role h3{margin:0;font:800 1.4rem var(--display)}
+.role .when{color:var(--muted);margin:2px 0 12px}
+.role ul{margin:0;padding-left:1.1em}
+.role li{margin:6px 0}
+.role.edu::before{background:var(--accent)}
+.role+.role{margin-top:36px}
+
+.proj{display:grid;grid-template-columns:1fr 1.3fr;gap:20px 40px;padding:28px 0;border-top:1px solid var(--line);transition:padding-left .25s}
+.proj:last-child{border-bottom:1px solid var(--line)}
+.proj:hover{padding-left:14px}
+.proj h3{margin:0;font:800 1.5rem var(--display)}
+.proj p{margin:0;color:var(--muted)}
+.visit{display:inline-block;margin-top:16px;font-weight:700;text-decoration:none;padding:10px 20px;border-radius:999px;background:var(--text);color:var(--bg);transition:transform .2s,background .2s}
+.visit:hover{transform:translateY(-3px);background:var(--accent);color:#fff}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;padding:0;list-style:none}
+.tags li{font-size:.85rem;font-weight:700;padding:4px 12px;border-radius:999px;background:var(--accent-bg);color:var(--accent)}
+
+.skillset{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;transition:transform .25s,border-color .25s}
+.box:hover{transform:translateY(-4px);border-color:var(--led)}
+.box h3{margin:0 0 10px;font:800 1.15rem var(--display)}
+.box .tags{margin:0}
+
+.certs{list-style:none;margin:0;padding:0}
+.certs li{display:flex;justify-content:space-between;gap:20px;padding:16px 0;border-top:1px solid var(--line)}
+.certs li:last-child{border-bottom:1px solid var(--line)}
+.certs b{display:block}
+.certs span{color:var(--muted);white-space:nowrap}
+
+.contact a.big{display:inline-block;font:800 clamp(1.4rem,5vw,2.8rem)/1.2 var(--display);text-decoration:none;border-bottom:4px solid var(--led);word-break:break-all;transition:color .2s}
+.contact a.big:hover{color:var(--accent)}
+.contact p{color:var(--muted);margin:22px 0 0}
+footer{padding:28px 0 36px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+
+/* nav: no scrolling inside the bar, links wrap instead */
+nav .wrap{height:auto;min-height:56px;justify-content:center;padding-top:8px;padding-bottom:8px}
+nav ul{overflow:visible;flex-wrap:wrap;justify-content:center;gap:6px clamp(14px,3vw,28px)}
+@media (max-width:760px){nav a{font-size:.85rem}}
+/* loading screen */
+body.ld{overflow:hidden}
+#loader{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:var(--screen);color:#EAF0FF;text-align:center;padding:24px;animation:leave .7s cubic-bezier(.7,0,.2,1) 2.6s forwards}
+.ldin{width:min(92vw,560px)}
+.ldname{font:800 clamp(2rem,8vw,3.6rem)/1.05 var(--display);opacity:0;transform:translateY(16px);animation:rise .8s cubic-bezier(.2,.8,.2,1) .2s forwards}
+.ldjob{display:inline-block;margin-top:14px;font:600 clamp(1rem,3.4vw,1.3rem) var(--body);color:var(--led);clip-path:inset(0 100% 0 0);animation:type 1.5s steps(52,end) .9s forwards}
+.ldbar{height:4px;margin:34px auto 12px;background:var(--led-dim);border-radius:4px;overflow:hidden}
+.ldbar i{display:block;height:100%;width:100%;background:var(--led);transform-origin:left;transform:scaleX(0);animation:fill 2.2s cubic-bezier(.5,0,.2,1) .2s forwards}
+.ldtxt{font-size:.85rem;color:#8F9BD0}
+@keyframes type{to{clip-path:inset(0 0 0 0)}}
+@keyframes fill{to{transform:scaleX(1)}}
+@keyframes leave{to{transform:translateY(-100%);visibility:hidden}}
+@media (prefers-reduced-motion:reduce){#loader{display:none}}
+@media (max-width:760px){
+  .grid2,.proj,.skillset{grid-template-columns:1fr}
+  .certs li{flex-direction:column;gap:2px}
+  nav b{display:none}
+  .hint{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .in,.hint{opacity:1;transform:none;animation:none!important}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body class="ld">
+<div id="loader" role="status" aria-label="Loading portfolio">
+  <div class="ldin">
+    <div class="ldname">Dawit</div>
+    <div class="ldjob">IT Support · LED Screen · Sound · Stage · Live Stream</div>
+    <div class="ldbar"><i></i></div>
+    <div class="ldtxt">Loading portfolio</div>
+  </div>
+</div>
+
+<nav aria-label="Main">
+  <div class="wrap">
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certs">Certificates</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+<header class="hero" id="top">
+  <canvas id="wall" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <h1 class="in" style="--d:0">IT Support, LED Screens, Sound and Live Events</h1>
+    <p class="in" style="--d:.15">Computer Science graduate who keeps offices running and events live: IT support, LED screens, sound, stage and live streaming, plus websites.</p>
+    <div class="cta in" style="--d:.3">
+      <a class="btn solid" href="#projects">See my projects</a>
+      <a class="btn ghost" href="#contact">Get in touch</a>
+    </div>
+  </div>
+  <div class="hint">Move your cursor over the screen</div>
+</header>
+
+<main>
+<section class="s" id="about"><div class="wrap grid2">
+  <div>
+    <h2>Reliable IT support, from the office to the live event.</h2>
+    <p class="lead">I graduated from Samara University with a BSc in Computer Science and now work in IT support and event production in Addis Ababa. I’m dedicated, I communicate clearly, and I stay calm when a deadline is close.</p>
+  </div>
+  <ul class="facts">
+    <li><strong>3.57</strong><span>CGPA, BSc Computer Science, Samara University</span></li>
+    <li><strong>2+ years</strong><span>IT support and event production at WAFA Marketing and Promotion</span></li>
+    <li><strong>Amharic · English</strong><span>Native Amharic, intermediate English</span></li>
+  </ul>
+</div></section>
+
+<section class="s" id="work"><div class="wrap">
+  <h2>Where I’ve worked and studied</h2>
+  <div class="role">
+    <h3>IT Support & Event Technician — WAFA Marketing and Promotion</h3>
+    <p class="when">January 2024 – Present · Addis Ababa</p>
+    <ul>
+      <li>Provide office IT support for both hardware and software issues on computers.</li>
+      <li>Configure and operate LED screens to display content at events.</li>
+      <li>Set up basic sound, stage and live-stream equipment, working with the team to tight deadlines.</li>
+    </ul>
+  </div>
+  <div class="role edu">
+    <h3>BSc in Computer Science — Samara University</h3>
+    <p class="when">Graduated July 19, 2023 · CGPA 3.57</p>
+    <ul>
+      <li>Passed the National Exit Examination in July 2023 with 62%.</li>
+      <li>Member of the SUIT/IT Club.</li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="s" id="projects"><div class="wrap">
+  <h2>Things I’ve built</h2>
+  <article class="proj">
+    <div><h3>Hotel Management System</h3><ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>PHP</li></ul></div>
+    <div><p>A hotel website for Kuriftu Hotel Samara, built as group leader in my third year at Samara University. It has pages for rooms and suites, dining, events and recreation, a booking form, and English and Amharic options.</p><a class="visit" href="https://dak1994.github.io/hotel/" target="_blank" rel="noopener">Visit the live website</a></div>
+  </article>
+  <article class="proj">
+    <div><h3>Personal Portfolio Website</h3><ul class="tags"><li>HTML</li><li>CSS</li></ul></div>
+    <p>My first personal site, designed and developed in August 2023. This page is the next version.</p>
+  </article>
+</div></section>
+
+<section class="s" id="skills"><div class="wrap">
+  <h2>What I can do for your team</h2>
+  <div class="skillset">
+    <div class="box"><h3>IT support</h3><ul class="tags"><li>Hardware troubleshooting</li><li>Software troubleshooting</li><li>Computer architecture</li></ul></div>
+    <div class="box"><h3>Web and data</h3><ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>PHP</li><li>Databases</li></ul></div>
+    <div class="box"><h3>Events and media</h3><ul class="tags"><li>LED screens</li><li>Basic sound</li><li>Stage setup</li><li>Live streaming</li><li>Illustrator basics</li></ul></div>
+    <div class="box"><h3>Office tools and people</h3><ul class="tags"><li>Word</li><li>PowerPoint</li><li>Excel</li><li>Teamwork</li><li>Problem solving</li><li>Works under pressure</li></ul></div>
+  </div>
+</div></section>
+
+<section class="s" id="certs"><div class="wrap">
+  <h2>Certificates</h2>
+  <ul class="certs">
+    <li><div><b>BSc in Computer Science</b>Samara University</div><span>July 2023</span></li>
+    <li><div><b>Employability Skills and Job Readiness</b>Dereja.com with Mastercard Foundation and Samara University</div><span>July 2023</span></li>
+    <li><div><b>Introduction to Graphic Design</b>Unizaf</div><span>September 2023</span></li>
+    <li><div><b>Illustrator Interface and Moving</b>Mindluster · No. 12502701473</div><span>October 2023</span></li>
+    <li><div><b>Work Readiness Training</b>Awaqi.org</div><span></span></li>
+  </ul>
+</div></section>
+
+<section class="s contact" id="contact"><div class="wrap">
+  <h2>Need someone who can fix it and run it?</h2>
+  <a class="big" href="mailto:dmesfin07@gmail.com">dmesfin07@gmail.com</a>
+  <p>Call or message: <a href="tel:+251943697802">+251 94 369 7802</a> · Addis Ababa, Ethiopia</p>
+</div></section>
+</main>
+<footer><div class="wrap">© 2026 Dawit Yirdaw Mesfin</div></footer>
+
+<script>
+(function(){
+  var cv=document.getElementById('wall'),ctx=cv.getContext('2d'),hero=document.getElementById('top');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cell,cols,rows,dots=[],W,H,dpr,mx=-999,my=-999,t0=0,run=true,raf;
+  function build(){
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    W=hero.clientWidth;H=hero.clientHeight;
+    cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    cell=W<600?11:15;cols=Math.floor(W/cell);rows=Math.floor(H/cell);
+    // sample the word DAWIT into a mask
+    var m=document.createElement('canvas');m.width=cols;m.height=rows;
+    var mc=m.getContext('2d');mc.fillStyle='#fff';mc.textAlign='center';mc.textBaseline='middle';
+    var fs=Math.min(cols*0.30,rows*0.42);
+    mc.font='800 '+fs+'px "Bricolage Grotesque","Arial Black",Arial,sans-serif';
+    mc.fillText('DAWIT',cols/2,rows*0.36);
+    var d=mc.getImageData(0,0,cols,rows).data;
+    dots=[];
+    for(var y=0;y<rows;y++)for(var x=0;x<cols;x++){
+      var lit=d[(y*cols+x)*4+3]>110;
+      dots.push({x:x*cell+cell/2,y:y*cell+cell/2,lit:lit,
+        delay:(x/cols)*1.1+Math.random()*0.5,flick:Math.random()*6.28,glow:0});
+    }
+  }
+  function draw(now){
+    var t=reduce?5:(now-t0)/1000;
+    ctx.clearRect(0,0,W,H);
+    var r=cell*0.34;
+    for(var i=0;i<dots.length;i++){
+      var p=dots[i],k=reduce?1:Math.min(Math.max((t-p.delay)/0.5,0),1);
+      var dx=p.x-mx,dy=p.y-my,dist=Math.sqrt(dx*dx+dy*dy);
+      var near=dist<110?1-dist/110:0;
+      p.glow+=(near-p.glow)*0.15;
+      var a,col;
+      if(p.lit){
+        col='255,176,32';a=0.25+0.75*k;
+        if(t<1.7&&!reduce)a*=0.55+0.45*Math.sin(t*14+p.flick);
+      }else{
+        col='96,120,255';a=(0.10+0.07*Math.sin(t*1.2+p.flick))*k;
+      }
+      a=Math.min(1,a+p.glow*0.9);
+      if(p.glow>0.05&&!p.lit)col='255,200,90';
+      var rr=r*(1+p.glow*0.9);
+      ctx.fillStyle='rgba('+col+','+a+')';
+      ctx.beginPath();ctx.arc(p.x,p.y,rr,0,6.283);ctx.fill();
+    }
+    if(!reduce&&run)raf=requestAnimationFrame(draw);
+  }
+  function start(){cancelAnimationFrame(raf);build();t0=performance.now();raf=requestAnimationFrame(draw)}
+  function pos(e){var b=cv.getBoundingClientRect();mx=e.clientX-b.left;my=e.clientY-b.top;if(reduce)draw(0)}
+  hero.addEventListener('pointermove',pos);
+  hero.addEventListener('pointerleave',function(){mx=my=-999});
+  window.addEventListener('resize',function(){clearTimeout(window._rz);window._rz=setTimeout(start,150)});
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(e){
+      var vis=e[0].isIntersecting;
+      if(vis&&!run&&!reduce){run=true;raf=requestAnimationFrame(draw)}else if(!vis){run=false}
+    }).observe(hero);
+  }
+  function go(){var wait=reduce?0:Math.max(0,3000-performance.now());setTimeout(function(){document.body.classList.remove('ld');document.body.classList.add('on');start()},wait)}
+  if(document.fonts&&document.fonts.load){
+    Promise.race([document.fonts.load('800 100px "Bricolage Grotesque"'),new Promise(function(r){setTimeout(r,1200)})]).then(go,go);
+  }else go();
+})();
+</script>
+</body>
+</html>
